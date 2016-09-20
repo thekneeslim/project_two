@@ -13,7 +13,13 @@ router.use(function(req, res, next) {
 });
 
 router.get('/home', isLoggedIn, function(req, res) {
-  res.render('login/home')
+  // var allCountries;
+  db.country.findAll().then(function(users) {
+    res.render('login/home', {allCountries: users})
+  // console.log(allCountries[1].dataValues.name);
+  });
+  // console.log(allCountries[1].dataValues.name);
+  // res.render('login/home', {allCountries: allCountries})
 });
 
 router.get('/settings', isLoggedIn, function(req, res) {
@@ -62,15 +68,6 @@ router.put("/settings/edit/:id", function(req, res) {
       });
     }
   }
-});
-
-
-router.get('/list', isLoggedIn, function(req, res) {
-  res.render('login/list')
-});
-
-router.get('/maps', isLoggedIn, function(req, res) {
-  res.redirect('/login/home')
 });
 
 module.exports = router;
