@@ -29,9 +29,9 @@ router.put("/settings/edit/:id", function(req, res) {
     db.user.update({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      gender: req.body.firstName,
-      age: req.body.firstName,
-      country: req.body.firstName
+      gender: req.body.gender,
+      age: req.body.age,
+      country: req.body.country
       }, {
       where: {
         id: req.params.id

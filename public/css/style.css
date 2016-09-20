@@ -84,12 +84,17 @@ li {
 /* HOME PAGE*/
 #bookmark {
   height: 500px;
-  border: 1px solid orange;
+  border: 1px solid #ddd;
+  border-radius: 20px;
 }
 
 #mapid {
   height: 450px;
   width: 100%
+}
+
+h4 {
+  padding: 5px;
 }
 
 .homeMap {
@@ -99,3 +104,20 @@ li {
 .btn-warning {
   margin: 8px;
 }
+
+.ccDiv {
+  margin-top: 5%;
+}
+
+.labelName {
+  text-align: left;
+}
+
+.ccInputs {
+  width: 90%;
+}
+
+/*.tab-pane {
+  border-bottom: 1px solid #ddd;
+  border-radius: 3px;
+}*/
