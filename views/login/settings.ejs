@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= currentUser.firstName %>'s Settings</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+  <h1>Profile Settings</h1>
+
+  <!-- EMAIL -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td class="inputName">
+            Email:
+          </td>
+          <td>
+            <%=currentUser.email%>
+          </td>
+        </tr>
+      </table>
+
+      <!-- <button type="button" class="btn btn-warning editbtn" data-toggle="modal" data-target="#myModal1">
+        Edit
+      </button> -->
+
+      <!-- Modal -->
+      <!-- <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Email</h4>
+            </div>
+            <form method="POST" class="form-horizontal" action="/login/settings/edit/<%=currentUser.id%>?_method=PUT">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="email" class="col-sm-4 control-label">Email</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="newEmail" name="newEmail" value="<%=currentUser.email%>">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-group">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form class="form-horizontal">
+          </div>
+        </div>
+      </div>  -->
+    </div>
+  </div>
+
+  <!-- PROFILE SETTINGS -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td class="inputName">First Name:</td>
+          <td ><%=currentUser.firstName%></td>
+        </tr>
+        <tr>
+          <td class="inputName">Last Name:</td>
+          <td><%=currentUser.lastName%></td>
+        </tr>
+        <tr>
+          <td class="inputName">Gender: </td>
+          <td><%=currentUser.gender%></td>
+        </tr>
+        <tr>
+          <td class="inputName">Age:</td>
+          <td><%=currentUser.age%></td>
+        </tr>
+        <tr>
+          <td class="inputName">Country:</td>
+          <td><%=currentUser.country%></td>
+        </tr>
+      </table>
+
+      <button type="button" class="btn btn-warning editbtn" data-toggle="modal" data-target="#myModal2">
+        Edit
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+            </div>
+            <form method="POST" class="form-horizontal" action="/login/settings/edit/<%=currentUser.id%>?_method=PUT">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="firstName" class="col-sm-4 control-label">First Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="<%=currentUser.firstName%>" placeholder="FirstName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastName" class="col-sm-4 control-label">Last Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="<%=currentUser.lastName%>"placeholder="Last Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="gender" class="col-sm-4 control-label">Gender</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="gender" name="gender" value="<%=currentUser.gender%>"placeholder="Gender">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="age" class="col-sm-4 control-label">Age</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="age" name="age" value="<%=currentUser.age%>"placeholder="Age">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="country" class="col-sm-4 control-label">Country</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="country" name="country" value="<%=currentUser.country%>"placeholder="Country">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-group">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form class="form-horizontal">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td class="inputName">
+            Password:
+          </td>
+          <td>
+            **********
+          </td>
+        </tr>
+      </table>
+      <button type="button" class="btn btn-warning editbtn" data-toggle="modal" data-target="#myModal3">
+        Edit
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+            </div>
+            <form method="POST" class="form-horizontal" action="/login/settings/edit/<%=currentUser.id%>?_method=PUT">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="oldPassword" class="col-sm-4 control-label">Old Password</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" value="" placeholder="Old Password" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="newPassword" class="col-sm-4 control-label">New Password</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" value="" placeholder="New Password" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirmNewPassword" class="col-sm-4 control-label">Confirm New Password</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" value="" placeholder="New Password" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-group">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form class="form-horizontal">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
