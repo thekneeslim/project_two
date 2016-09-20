@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= currentUser.firstName %>'s Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="../home_map.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+  </head>
+  <body>
+
+    <h1>WELCOME <%= currentUser.firstName %>!</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3" id="bookmark"> Favs</div>
+        <div class="col-sm-9 col-md-9 col-lg-9" id="mapGrid">
+
+          <div id="buttonsMap">
+            <button type="button" id="satelite" class="btn btn-warning homeMap">Satelite</button>
+            <button type="button" id="street" class="btn btn-default btn-warning homeMap" data-container="body" data-toggle="popover" data-placement="top" data-content="Click me!">Street</button>
+            <button type="button" id="dark" class="btn btn-warning homeMap">Dark</button>
+          </div>
+
+          <div class="col-sm-9 col-md-9" id="mapid"></div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

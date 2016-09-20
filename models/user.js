@@ -38,6 +38,33 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Password must be between 8 and 99 characters'
         }
       }
+    },
+    gender: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [3, 10],
+          msg: 'Gender must be either Male or Female'
+        }
+      }
+    },
+    age: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [0, 99],
+          msg: 'Age must be a valid integer'
+        }
+      }
+    },
+    country: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [1, 20],
+          msg: 'Country must be between 1 and 20 characters'
+        }
+      }
     }
   }, {
     hooks: {

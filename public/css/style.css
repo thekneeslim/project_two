@@ -82,18 +82,20 @@ li {
 }
 
 /* HOME PAGE*/
-.favLeft {
-  border: 1px solid black;
-}
-
-.mapRight {
+#bookmark {
+  height: 500px;
   border: 1px solid orange;
 }
 
-#bookmark {
-
+#mapid {
+  height: 450px;
+  width: 100%
 }
 
-#mapBaseLayer {
+.homeMap {
+  width: 100px;
+}
 
+.btn-warning {
+  margin: 8px;
 }

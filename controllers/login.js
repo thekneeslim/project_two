@@ -13,7 +13,7 @@ router.use(function(req, res, next) {
 });
 
 router.get('/home', isLoggedIn, function(req, res) {
-  res.render('home')
+  res.render('login/home')
 });
 
 router.get('/settings', isLoggedIn, function(req, res) {

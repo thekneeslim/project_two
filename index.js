@@ -44,7 +44,7 @@ app.use('/login', require('./controllers/login'));
 
 app.get('/', function(req, res) {
   if (req.user) {
-    res.render('home')
+    res.render('login/home')
   } else {
     res.render('index')
   }
