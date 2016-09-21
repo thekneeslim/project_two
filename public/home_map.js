@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var planesLayer = new L.FeatureGroup();
 
   function drawPlanesRevised() {
-    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/100?appId=f42da214&appKey=15274afb0a06ac7cad9a29ca192e0c4c&maxFlights=2';
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/100?appId=f42da214&appKey=15274afb0a06ac7cad9a29ca192e0c4c&maxFlights=5';
     console.log("Draw Plane", coordinates)
     console.log(url)
     $.get(url).done(function(data) {
@@ -86,6 +86,28 @@ document.addEventListener("DOMContentLoaded", function() {
     drawMap(mapType)
   });
 
+  // SEARCH BY FAVOURITES
+  $('#favSearch').submit(function(e) {
+    e.preventDefault();
+
+    var country = $('#favSelected').val()
+    console.log(country)
+
+    getCountrySelectedInfo(country)
+
+    function getCountrySelectedInfo(apple) {
+      $.ajax({
+        url: 'http://localhost:3000/login/home/countryinfo',
+        type: 'POST',
+        data: {countryName: apple}
+      }).done(function (data) {
+        coordinates = [data.latitude, data.longitude];
+        mymap.setView(coordinates, 7);
+        drawMap(mapType)
+      })
+    }
+  })
+
   // SEARCH BY COORDINATES
   $('#corSearch').submit(function(e) {
     e.preventDefault();
@@ -113,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getCountrySelectedInfo(apple) {
       $.ajax({
-        url: 'http://localhost:3000/login/home/info',
+        url: 'http://localhost:3000/login/home/idinfo',
         type: 'POST',
         data: {id: apple}
       }).done(function (data) {

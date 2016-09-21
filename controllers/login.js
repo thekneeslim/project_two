@@ -12,13 +12,22 @@ router.use(function(req, res, next) {
   next();
 });
 
+
+// ROUTES RELATED TO HOME
 router.get('/home', isLoggedIn, function(req, res) {
-  db.country.findAll().then(function(users) {
-    res.render('login/home', {allCountries: users})
+  db.country.findAll().then(function(country) {
+    db.favourite.findAll({
+      where: {
+        userId: req.user.dataValues.id
+      }
+    }).then(function(favourites) {
+      console.log(favourites)
+      res.render('login/home', {allCountries: country, favourites: favourites})
+    })
   });
 });
 
-router.post('/home/info', isLoggedIn, function(req, res) {
+router.post('/home/idinfo', isLoggedIn, function(req, res) {
   console.log(req.body.id);
   db.country.find({
     where: {id: req.body.id}
@@ -32,9 +41,24 @@ router.post('/home/info', isLoggedIn, function(req, res) {
   })
 });
 
+router.post('/home/countryinfo', isLoggedIn, function(req, res) {
+  console.log(req.body);
+  db.country.find({
+    where: {name: req.body.countryName}
+  }).then(function(country) {
+    var coordinatesSelected = {
+      latitude : country.latitude,
+      longitude : country.longitude
+    }
+
+    res.send(coordinatesSelected);
+  })
+});
+
+// ROUTES RELATED TO SETTINGS & PROFILE
 router.get('/settings', isLoggedIn, function(req, res) {
-  db.country.findAll().then(function(users) {
-    res.render('login/settings', {allCountries: users})
+  db.country.findAll().then(function(country) {
+    res.render('login/settings', {allCountries: country})
   });
 });
 
@@ -80,6 +104,47 @@ router.put("/settings/edit/:id", function(req, res) {
       });
     }
   }
+});
+
+// ROUTES RELATING MANAGING FAVOURITES
+router.get('/favourites', isLoggedIn, function(req, res) {
+  // var allCountries = 0;
+  db.country.findAll().then(function(country) {
+    // allCountries = country;
+    db.favourite.findAll({
+      where: {
+        userId: req.user.dataValues.id
+      }
+    }).then(function(favourites) {
+      console.log(favourites)
+      console.log("Routing back to client");
+      res.render('login/favourites', {allCountries: country, favourites: favourites})
+    })
+  });
+});
+
+router.post('/favourites', isLoggedIn, function(req, res) {
+  console.log("I'm creating")
+  console.log(req.body)
+  db.favourite.create({
+    countryName: req.body.countryAdded,
+    userId: req.user.dataValues.id
+  }).then(function(favorite) {
+    //code here
+    console.log("redirecting");
+    res.redirect('/login/favourites')
+  })
+});
+
+router.delete('/favourites/edit/:id', isLoggedIn, function(req, res) {
+  console.log("I'm deleting")
+  db.favourite.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function() {
+    res.redirect('/login/favourites')
+  });
 });
 
 module.exports = router;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= currentUser.firstName %>'s Searching</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+  </head>
+  <body>
+
+    <h1>Manage Favourites</h1>
+
+    <div class="container">
+      <form method="POST" action="/login/favourites" id="addFav">
+        <div class="form-group">
+          <label class="labelName addingFavouritesStyle" for="addFav">Country</label>
+          <select class="form-control addingFavouritesStyle" name="countryAdded" id="addFavourites">
+            <option selected disabled>--SELECT--</option>
+            <% for(var i = 0; i < allCountries.length; i++) { %>
+              <option value="<%=allCountries[i].dataValues.name%>"><%=allCountries[i].dataValues.name%></option>
+            <%}%>
+          </select>
+          <button type="submit" id="addFavBtn" class="btn btn-warning addingFavouritesStyle">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table class="table">
+            <tr>
+              <th>Country Name</th>
+              <th class="tableHeader">Edit</th>
+            </tr>
+              <%for (var i = 0; i < favourites.length; i++) {%>
+                <form method="POST" class="" action="/login/favourites/edit/<%=favourites[i].id%>?_method=DELETE">
+                  <tr>
+                    <td class="tableAlignLeft"><%=favourites[i].countryName%></td>
+                    <td ><button type="submit" name="deleteBtn" class="btn btn-warning addingFavouritesStyle" id="<%=favourites[i].id%>">Delete</button></td>
+                  </tr>
+                </form>
+              <%}%>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
