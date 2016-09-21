@@ -13,15 +13,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // ON LOAD AND UPDATING PLANE MOVEMENTS
   drawMap(mapType);
   setInterval(function() {
-    drawPlanes();
-  }, 3000);
+    console.log("I'm clearing!")
+    mymap.removeLayer(planesLayer)
+    console.log("I'm drawing!")
+    drawPlanesRevised();
+  }, 6000);
 
   // DRAWING MAP
   function drawMap(apple) {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 13,
-      minZoom: 5,
+      minZoom: 2,
       zoomControl: false,
       id: apple,
       accessToken: 'pk.eyJ1IjoidGhla25lZXNsaW0iLCJhIjoiY2l0YjdmNDgzMDU4ajJubHFyaGc4ZTFwaSJ9.hgmQr058MoQktYgNL-m6iA'
@@ -42,17 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
   	iconSize: [30, 30],
   });
 
-  var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/100?appId=f42da214&appKey=15274afb0a06ac7cad9a29ca192e0c4c&maxFlights=20';
+  var planesLayer = new L.FeatureGroup();
 
-  function drawPlanes() {
+  function drawPlanesRevised() {
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/100?appId=f42da214&appKey=15274afb0a06ac7cad9a29ca192e0c4c&maxFlights=2';
+    console.log("Draw Plane", coordinates)
+    console.log(url)
     $.get(url).done(function(data) {
       console.log(data.flightPositions.length);
-
-      // if(tempPlanes.length !== 1) {
-      //   for(var k = 0; k< tempPlanes.length; k++) {
-      //     mymap.removeLayer(tempPlanes[i]);
-      //   }
-      // }
 
       for(var i = 0; i < data.flightPositions.length; i++) {
         var longC = data.flightPositions[i].positions[0].lon;
@@ -61,9 +61,11 @@ document.addEventListener("DOMContentLoaded", function() {
         var altitude = data.flightPositions[i].positions[0].altitudeFt;
         var speed = data.flightPositions[i].positions[0].speedMph
 
-        L.marker([latC, longC], {icon: myIcon}).addTo(mymap);
-        // tempPlanes.push(x)
+        var x = L.marker([latC, longC], {icon: myIcon})
+
+        planesLayer.addLayer(x);
       }
+      mymap.addLayer(planesLayer);
     })
   }
 
