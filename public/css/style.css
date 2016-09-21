@@ -91,6 +91,21 @@ li {
 #mapid {
   height: 450px;
   width: 100%
+  position: absolute;
+}
+
+#mapinfo {
+  display: block;
+  position: relative;
+  margin: 0px auto;
+  width: 50%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: center;
+  color: #222;
+  background: #fff;
 }
 
 h4 {

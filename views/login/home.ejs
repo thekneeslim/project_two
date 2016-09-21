@@ -5,15 +5,19 @@
     <title><%= currentUser.firstName %>'s Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script src="../home_map.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.24.0/mapbox-gl.js'></script>
     <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="../home_map.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
   <body>
 
     <h1>WELCOME <%= currentUser.firstName %>!</h1>
 
     <div class="container">
+
+      <!-- LEFT COLUMN -->
       <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3" id="bookmark">
           <h4>Search By</h4>
@@ -49,7 +53,7 @@
                     <div class="form-group">
                       <label class="labelName" for="country">Country</label>
                       <select class="form-control ccInputs" id="countrySelected">
-                        <option>--SELECT--</option>
+                        <option selected disabled>--SELECT--</option>
                         <% for(var i = 0; i < allCountries.length; i++) { %>
                         <option value="<%=allCountries[i].dataValues.id%>" name="<%=allCountries[i].dataValues%>"><%=allCountries[i].dataValues.name%></option>
                         <%}%>
@@ -63,6 +67,8 @@
           </div>
 
         </div>
+
+        <!-- RIGHT MAP -->
         <div class="col-sm-9 col-md-9 col-lg-9" id="mapGrid">
 
           <div id="buttonsMap">
@@ -72,6 +78,7 @@
           </div>
 
           <div class="col-sm-9 col-md-9" id="mapid"></div>
+          <pre id='mapinfo'></pre>
 
         </div>
       </div>

@@ -9,9 +9,12 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var methodOverride = require('method-override')
+var cors = require('cors');
 
 var publicPath = path.join(__dirname, 'public');
 app.use(express.static(publicPath));
+
+app.use(cors());
 
 app.use(methodOverride('_method'));
 

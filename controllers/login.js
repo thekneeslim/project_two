@@ -13,13 +13,23 @@ router.use(function(req, res, next) {
 });
 
 router.get('/home', isLoggedIn, function(req, res) {
-  // var allCountries;
   db.country.findAll().then(function(users) {
     res.render('login/home', {allCountries: users})
-  // console.log(allCountries[1].dataValues.name);
   });
-  // console.log(allCountries[1].dataValues.name);
-  // res.render('login/home', {allCountries: allCountries})
+});
+
+router.post('/home/info', isLoggedIn, function(req, res) {
+  console.log(req.body.id);
+  db.country.find({
+    where: {id: req.body.id}
+  }).then(function(country) {
+    var coordinatesSelected = {
+      latitude : country.latitude,
+      longitude : country.longitude
+    }
+
+    res.send(coordinatesSelected);
+  })
 });
 
 router.get('/settings', isLoggedIn, function(req, res) {
