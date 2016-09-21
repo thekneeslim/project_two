@@ -37,5 +37,40 @@ document.addEventListener("DOMContentLoaded", function() {
     drawMap(mapType)
   });
 
+  $('#corSearch').submit(function(e) {
+    e.preventDefault();
+    var latitude = $('#latitude').val()
+    var longitude = $('#longitude').val()
+    var coordinates = [latitude,longitude];
+
+    $.ajax({
+      url: 'http://localhost:3000/login/home',
+      type: 'GET'
+    }).done(function (data) {
+      mymap.setView(coordinates, 7);
+      drawMap(mapType)
+    })
+  })
+
+  $('#countrySearch').submit(function(e) {
+    e.preventDefault();
+
+    var countryID = $('#countrySelected').val()
+    console.log(countryID)
+
+    // var latitude = $('#latitude').val()
+    // var longitude = $('#longitude').val()
+    // var coordinates = [latitude,longitude];
+    //
+    // $.ajax({
+    //   url: 'http://localhost:3000/login/home',
+    //   type: 'GET'
+    // }).done(function (data) {
+    //   mymap.setView(coordinates, 7);
+    //   drawMap(mapType)
+    // })
+
+  })
+
 // END OF DOM CONTENT LOADED
 })

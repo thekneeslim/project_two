@@ -41,6 +41,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     gender: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         len: {
           args: [3, 10],
@@ -50,6 +51,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     age: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         len: {
           args: [0, 99],
@@ -59,6 +61,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     country: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         len: {
           args: [1, 20],
