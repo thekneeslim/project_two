@@ -33,7 +33,9 @@ router.post('/home/info', isLoggedIn, function(req, res) {
 });
 
 router.get('/settings', isLoggedIn, function(req, res) {
-  res.render('login/settings')
+  db.country.findAll().then(function(users) {
+    res.render('login/settings', {allCountries: users})
+  });
 });
 
 router.post('/settings', isLoggedIn, function(req, res) {

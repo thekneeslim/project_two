@@ -7,27 +7,28 @@ document.addEventListener("DOMContentLoaded", function() {
   var tempPlanes =[];
   var mymap = L.map('mapid', {
     center: coordinates,
-    zoom: 10
+    zoom: 7
   });
 
   // ON LOAD AND UPDATING PLANE MOVEMENTS
   drawMap(mapType);
-  setInterval(function() {
-    console.log("I'm clearing!")
-    mymap.removeLayer(planesLayer)
-    console.log("I'm drawing!")
-    drawPlanesRevised();
-  }, 6000);
+  // setInterval(function() {
+  //   console.log("I'm clearing!")
+  //   mymap.removeLayer(planesLayer)
+  //   console.log("I'm drawing!")
+  //   drawPlanesRevised();
+  // }, 6000);
 
   // DRAWING MAP
   function drawMap(apple) {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 13,
-      minZoom: 2,
+      minZoom: 4,
       zoomControl: false,
       id: apple,
       accessToken: 'pk.eyJ1IjoidGhla25lZXNsaW0iLCJhIjoiY2l0YjdmNDgzMDU4ajJubHFyaGc4ZTFwaSJ9.hgmQr058MoQktYgNL-m6iA'
+
     }).addTo(mymap);
   }
 
@@ -122,6 +123,9 @@ document.addEventListener("DOMContentLoaded", function() {
       })
     }
   })
+
+// FULL SCREEN
+
 
   // END OF DOM CONTENT LOADED
 })
