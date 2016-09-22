@@ -1,9 +1,14 @@
 /* LAYOUT.EJS */
 body {
   text-align: center;
+  background-color: #f7f7f9;
 }
 
-.navbar-default .navbar-nav>.active>a {
+.navbar-default {
+  background-color: #39CCE3;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-nav>.active>a:hover {
   background-color: inherit;
 }
 
@@ -15,6 +20,7 @@ body {
 .topHeader {
   display: inline-block;
   text-decoration: none;
+  color: #777;
 }
 
 #loginPic {
@@ -30,7 +36,6 @@ body {
 
 #loginBtn {
   width: 300px;
-  background-color: orange;
 }
 
 .AddInfo {
@@ -59,7 +64,7 @@ li {
   margin: 30px auto;
 }
 
-.btn-warning {
+.btn-info {
   width: 100px;
   margin: 10px;
   right: 10px;
@@ -80,7 +85,7 @@ li {
 /* HOME PAGE*/
 #bookmark {
   height: 500px;
-  border: 1px solid #ddd;
+  border: 1px solid ##5bc0de;
   border-radius: 4px;
 }
 
@@ -130,6 +135,11 @@ h4 {
 
 .homePanel {
   width: 95%;
+}
+
+.panel-default>.panel-heading {
+  background-color: #5bc0de;
+  color: white;
 }
 
 /* FAVOURITES */

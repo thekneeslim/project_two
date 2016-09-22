@@ -15,11 +15,14 @@ router.use(function(req, res, next) {
 
 // ROUTES RELATED TO HOME
 router.get('/home', isLoggedIn, function(req, res) {
-  db.country.findAll().then(function(country) {
+  db.country.findAll({
+    order: 'name ASC'
+  }).then(function(country) {
     db.favourite.findAll({
       where: {
         userId: req.user.dataValues.id
-      }
+      },
+      order: ['countryName']
     }).then(function(favourites) {
       console.log(favourites)
       res.render('login/home', {allCountries: country, favourites: favourites})
@@ -108,13 +111,14 @@ router.put("/settings/edit/:id", function(req, res) {
 
 // ROUTES RELATING MANAGING FAVOURITES
 router.get('/favourites', isLoggedIn, function(req, res) {
-  // var allCountries = 0;
-  db.country.findAll().then(function(country) {
-    // allCountries = country;
+  db.country.findAll({
+    order: 'name ASC'
+  }).then(function(country) {
     db.favourite.findAll({
       where: {
         userId: req.user.dataValues.id
-      }
+      },
+      order: ['countryName']
     }).then(function(favourites) {
       console.log(favourites)
       console.log("Routing back to client");

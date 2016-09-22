@@ -48,59 +48,30 @@
                       <button type="submit" class="btn btn-default">Search</button>
                     </form>
                   </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel panel-default homePanel">
-            <div class="panel-heading" role="tab" id="headingTwo">
-              <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                  Search Coordinates
-                </a>
-              </h4>
-            </div>
-
-            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-              <div class="panel-body">
-                <div class="ccDiv">
-                  <form id="corSearch">
-                    <div class="form-group">
-                      <input type="number" step="any" class="form-control ccInputs" id="latitude" name="latitude" placeholder="Latitude">
-                    </div>
-                    <div class="form-group">
-                      <label class="labelName" for="longitude">Longitude</label>
-                      <input type="number" step="any" class="form-control ccInputs" id="longitude" name="longitude" placeholder="Longitude">
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                  </form>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="panel panel-default homePanel">
-            <div class="panel-heading" role="tab" id="headingThree">
-              <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                  Search Country
-                </a>
-              </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-              <div class="panel-body">
-                <div>
-                  <div role="tabpanel" class="tab-pane" id="country">
-                    <div class="ccDiv">
-                      <form id="countrySearch">
-                        <div class="form-group">
-                          <label class="labelName" for="country">Country</label>
-                          <select class="form-control ccInputs" id="countrySelected">
-                            <option selected disabled>--SELECT--</option>
-                            <% for(var i = 0; i < allCountries.length; i++) { %>
-                              <option value="<%=allCountries[i].dataValues.id%>" name="<%=allCountries[i].dataValues%>"><%=allCountries[i].dataValues.name%></option>
-                              <%}%>
-                            </select>
+            <div class="panel panel-default homePanel">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Search Coordinates
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  <div>
+                    <div role="tabpanel" class="tab-pane" id="country">
+                      <div class="ccDiv">
+                        <form id="corSearch">
+                          <div class="form-group">
+                            <input type="number" step="any" class="form-control ccInputs" id="latitude" name="latitude" placeholder="Latitude">
+                          </div>
+                          <div class="form-group">
+                            <label class="labelName" for="longitude">Longitude</label>
+                            <input type="number" step="any" class="form-control ccInputs" id="longitude" name="longitude" placeholder="Longitude">
                           </div>
                           <button type="submit" class="btn btn-default">Search</button>
                         </form>
@@ -111,27 +82,59 @@
               </div>
             </div>
 
+            <div class="panel panel-default homePanel">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Search Country
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  <div>
+                    <div role="tabpanel" class="tab-pane" id="country">
+                      <div class="ccDiv">
+                        <form id="countrySearch">
+                          <div class="form-group">
+                            <label class="labelName" for="country">Country</label>
+                            <select class="form-control ccInputs" id="countrySelected">
+                              <option selected disabled>--SELECT--</option>
+                              <% for(var i = 0; i < allCountries.length; i++) { %>
+                                <option value="<%=allCountries[i].dataValues.id%>" name="<%=allCountries[i].dataValues%>"><%=allCountries[i].dataValues.name%></option>
+                                <%}%>
+                              </select>
+                            </div>
+                            <button type="submit" class="btn btn-default">Search</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
 
-        <!-- ======================================================================= -->
+          <!-- ======================================================================= -->
 
-        <!-- RIGHT MAP -->
-        <div class="col-sm-9 col-md-9 col-lg-9" id="mapGrid">
+          <!-- RIGHT MAP -->
+          <div class="col-sm-9 col-md-9 col-lg-9" id="mapGrid">
 
-          <div id="buttonsMap">
-            <button type="button" id="satelite" class="btn btn-warning homeMap">Satelite</button>
-            <button type="button" id="street" class="btn btn-default btn-warning homeMap" data-container="body" data-toggle="popover" data-placement="top" data-content="Click me!">Street</button>
-            <button type="button" id="dark" class="btn btn-warning homeMap">Dark</button>
+            <div id="buttonsMap">
+              <button type="button" id="satelite" class="btn btn-info homeMap">Satelite</button>
+              <button type="button" id="street" class="btn btn-default btn-info homeMap" data-container="body" data-toggle="popover" data-placement="top" data-content="Click me!">Street</button>
+              <button type="button" id="dark" class="btn btn-info homeMap">Dark</button>
+            </div>
+
+            <div class="col-sm-12 col-md-12" id="mapid"></div>
+            <pre id='mapinfo'></pre>
+
           </div>
-
-          <div class="col-sm-12 col-md-12" id="mapid"></div>
-          <pre id='mapinfo'></pre>
-
         </div>
       </div>
-    </div>
 
 
-  </body>
-  </html>
+    </body>
+    </html>
