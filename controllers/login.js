@@ -111,6 +111,7 @@ router.put("/settings/edit/:id", function(req, res) {
 
 // ROUTES RELATING MANAGING FAVOURITES
 router.get('/favourites', isLoggedIn, function(req, res) {
+  console.log(req.user)
   db.country.findAll({
     order: 'name ASC'
   }).then(function(country) {

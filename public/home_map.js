@@ -2,7 +2,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   console.log("HELLO WORLD")
 
+
+  var appID = 'f42da214';
+  var appKey = 'f8506d8ede4ce5dfb19acc93e46ef235'
   var mapType = 'thekneeslim.1einhmc9'
+  // var coordinates = [35.9, 127.77];
+  var planesLayer;
   var coordinates = [1.352, 103.820];
   var tempPlanes =[];
   var mymap = L.map('mapid', {
@@ -12,12 +17,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // ON LOAD AND UPDATING PLANE MOVEMENTS
   drawMap(mapType);
-  // setInterval(function() {
-  //   console.log("I'm clearing!")
-  //   mymap.removeLayer(planesLayer)
-  //   console.log("I'm drawing!")
-  //   drawPlanesRevised();
-  // }, 6000);
+  setTimeout(function() {
+    drawPlanesRevised()
+  }, 1000)
+  setInterval(function() {
+    console.log("I'm clearing!")
+    mymap.removeLayer(planesLayer)
+    console.log(coordinates)
+    console.log("I'm drawing!")
+    drawPlanesRevised();
+  }, 5000);
 
   // DRAWING MAP
   function drawMap(apple) {
@@ -36,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
   mymap.on('click', function(e) {
     var latitude = e.latlng.lat;
     var longitude = e.latlng.lng;
-    console.log(latitude + " - " + longitude)
+    console.log('map location: ' + latitude + " - " + longitude)
   });
 
   // DRAWING OF PLANE & LIVE FEED
@@ -46,28 +55,52 @@ document.addEventListener("DOMContentLoaded", function() {
   	iconSize: [30, 30],
   });
 
-  var planesLayer = new L.FeatureGroup();
+  // var planesLayer = new L.FeatureGroup();
 
   function drawPlanesRevised() {
-    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=1dc95c64&appKey=1e318ae140b09b5a47e0e28237579170&maxFlights=2';
-    console.log("Draw Plane", coordinates)
-    console.log(url)
+//  ORIGINAL CODE
+    planesLayer = new L.FeatureGroup();
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=5';
+    // console.log("Draw Plane", coordinates)
+    // console.log(url)
     $.get(url).done(function(data) {
       console.log(data.flightPositions.length);
-
+      console.log('data: ' + data);
       for(var i = 0; i < data.flightPositions.length; i++) {
         var longC = data.flightPositions[i].positions[0].lon;
         var latC = data.flightPositions[i].positions[0].lat;
         var callSign = data.flightPositions[i].callsign;
         var altitude = data.flightPositions[i].positions[0].altitudeFt;
         var speed = data.flightPositions[i].positions[0].speedMph
+        var popContent = "Call Sign: " + callSign + "<br/>" +"Lon: " + longC + "<br/>" + "Lat: " + latC + "<br/>" + "Altitude: " + altitude + "<br/>" + "Speed: " + speed
+        console.log(popContent)
 
-        var x = L.marker([latC, longC], {icon: myIcon})
-
+        var x = L.marker([latC, longC], {icon: myIcon}, {className: i})
+        var planeObject = new planeInfo(i, longC, latC, callSign, altitude, speed)
+        console.log(planeObject);
+        // x.bindPopup('<div class="trigger" id=i>Hello</div>')
+        // .addTo(mymap);
         planesLayer.addLayer(x);
+        // x._icon.id = planeObject.id
       }
       mymap.addLayer(planesLayer);
+      // console.log(planesLayer)
     })
+
+    // var longC = coordinates[1];
+    // var latC = coordinates[0];
+    // var callSign = 'callsign';
+    // var altitude = 'altitudeFt';
+    // var speed = 'speedMph';
+    //
+    // var x = L.marker([latC, longC], {icon: myIcon})
+    //
+    // planesLayer.addLayer(x);
+    // coordinates[1] += 1
+    // coordinates[0] += 1
+    //
+    // mymap.addLayer(planesLayer);
+
   }
 
   // CHANGING MAPS
@@ -146,8 +179,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
-// FULL SCREEN
+//  FUNCTION TO STORE PLANE DETAILS
+function planeInfo(id, lon, lat, call, alt, spd) {
+  this.id = id;
+  this.longitude = lon;
+  this.lattutide = lat;
+  this.callSign = call;
+  this.altitude = alt;
+  this.speed = spd;
+  this.describe = function() {
+    var popContent = "Call Sign: " + this.callSign + "<br/>" +"Lon: " + this.longitude + "<br/>" + "Lat: " +   this.lattutide + "<br/>" + "Altitude: " + this.altitude + "<br/>" + "Speed: " + this.speed
+    return popContent
+  }
+}
 
+
+// FULL SCREEN
+L.control.fullscreen().addTo(mymap);
 
   // END OF DOM CONTENT LOADED
 })
