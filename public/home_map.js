@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function drawPlanesRevised() {
 //  ORIGINAL CODE
     planesLayer = new L.FeatureGroup();
-    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=50';
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=5';
     // console.log("Draw Plane", coordinates)
     console.log(url)
     $.get(url).done(function(data) {
