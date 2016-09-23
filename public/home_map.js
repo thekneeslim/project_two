@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(coordinates)
     console.log("I'm drawing!")
     drawPlanesRevised();
-  }, 5000);
+  }, 15000);
 
   // DRAWING MAP
   function drawMap(apple) {
@@ -73,15 +73,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var altitude = data.flightPositions[i].positions[0].altitudeFt;
         var speed = data.flightPositions[i].positions[0].speedMph
         var popContent = "Call Sign: " + callSign + "<br/>" +"Lon: " + longC + "<br/>" + "Lat: " + latC + "<br/>" + "Altitude: " + altitude + "<br/>" + "Speed: " + speed
-        console.log(popContent)
 
-        var x = L.marker([latC, longC], {icon: myIcon}, {className: i})
-        var planeObject = new planeInfo(i, longC, latC, callSign, altitude, speed)
-        console.log(planeObject);
-        // x.bindPopup('<div class="trigger" id=i>Hello</div>')
-        // .addTo(mymap);
+        var x = L.marker([latC, longC], {icon: myIcon})
+
+        x.bindPopup(popContent.toString())
+
         planesLayer.addLayer(x);
-        // x._icon.id = planeObject.id
       }
       mymap.addLayer(planesLayer);
       // console.log(planesLayer)
@@ -178,21 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
       })
     }
   })
-
-//  FUNCTION TO STORE PLANE DETAILS
-function planeInfo(id, lon, lat, call, alt, spd) {
-  this.id = id;
-  this.longitude = lon;
-  this.lattutide = lat;
-  this.callSign = call;
-  this.altitude = alt;
-  this.speed = spd;
-  this.describe = function() {
-    var popContent = "Call Sign: " + this.callSign + "<br/>" +"Lon: " + this.longitude + "<br/>" + "Lat: " +   this.lattutide + "<br/>" + "Altitude: " + this.altitude + "<br/>" + "Speed: " + this.speed
-    return popContent
-  }
-}
-
 
 // FULL SCREEN
 L.control.fullscreen().addTo(mymap);
