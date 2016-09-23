@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getCountrySelectedInfo(apple) {
       $.ajax({
-        url: 'http://localhost:3000/login/home/countryinfo',
+        url: '/login/home/countryinfo',
         type: 'POST',
         data: {countryName: apple}
       }).done(function (data) {
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
     coordinates = [latitude,longitude];
 
     $.ajax({
-      url: 'http://localhost:3000/login/home',
+      url: '/login/home',
       type: 'GET'
     }).done(function (data) {
       mymap.setView(coordinates, 7);
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getCountrySelectedInfo(apple) {
       $.ajax({
-        url: 'http://localhost:3000/login/home/idinfo',
+        url: '/login/home/idinfo',
         type: 'POST',
         data: {id: apple}
       }).done(function (data) {
