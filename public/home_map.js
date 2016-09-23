@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log("HELLO WORLD")
 
 
-  var appID = 'f42da214';
-  var appKey = 'f8506d8ede4ce5dfb19acc93e46ef235'
+  var appID = '32c5ace3';
+  var appKey = 'd6841c71671e28a21c520f886b634c2c'
   var mapType = 'thekneeslim.1einhmc9'
   // var coordinates = [35.9, 127.77];
   var planesLayer;
