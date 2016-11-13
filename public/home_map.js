@@ -3,8 +3,12 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log("HELLO WORLD")
 
 
-  var appID = '32c5ace3';
-  var appKey = 'd6841c71671e28a21c520f886b634c2c'
+  // var appID = '32c5ace3';
+  // var appID = '1dc95c64';
+  var appID = 'a982faf1';
+  // var appKey = 'd6841c71671e28a21c520f886b634c2c'
+  // var appKey = '1e318ae140b09b5a47e0e28237579170'
+  var appKey = 'c3321efa5359f02134630e1e27533ca9'
   var mapType = 'thekneeslim.1einhmc9'
   // var coordinates = [35.9, 127.77];
   var planesLayer;
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function drawPlanesRevised() {
 //  ORIGINAL CODE
     planesLayer = new L.FeatureGroup();
-    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=5';
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=50';
     // console.log("Draw Plane", coordinates)
     console.log(url)
     $.get(url).done(function(data) {
