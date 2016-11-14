@@ -62,46 +62,70 @@ document.addEventListener("DOMContentLoaded", function() {
   // var planesLayer = new L.FeatureGroup();
 
   function drawPlanesRevised() {
-//  ORIGINAL CODE
+    console.log("Im in draw Planes Revised");
+    // //  ORIGINAL CODE
+    // planesLayer = new L.FeatureGroup();
+    // var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=50/?callback=drawPlanesRevised';
+    // // console.log("Draw Plane", coordinates)
+    // console.log(url)
+    // $.get(
+    //     url
+    //     // dataType: "jsonp",
+    //   ).done(function(data) {
+    //   console.log(data.flightPositions.length);
+    //   console.log('data: ' + data);
+    //   for(var i = 0; i < data.flightPositions.length; i++) {
+    //     var longC = data.flightPositions[i].positions[0].lon;
+    //     var latC = data.flightPositions[i].positions[0].lat;
+    //     var callSign = data.flightPositions[i].callsign;
+    //     var altitude = data.flightPositions[i].positions[0].altitudeFt;
+    //     var speed = data.flightPositions[i].positions[0].speedMph
+    //     var popContent = "Call Sign: " + callSign + "<br/>" +"Lon: " + longC + "<br/>" + "Lat: " + latC + "<br/>" + "Altitude: " + altitude + "<br/>" + "Speed: " + speed
+    //
+    //     var x = L.marker([latC, longC], {icon: myIcon})
+    //
+    //     x.bindPopup(popContent.toString())
+    //
+    //     planesLayer.addLayer(x);
+    //   }
+    //   mymap.addLayer(planesLayer);
+    // })
+
+    // AMENDED CODE
     planesLayer = new L.FeatureGroup();
-    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/json/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=50';
-    // console.log("Draw Plane", coordinates)
-    console.log(url)
-    $.get(url).done(function(data) {
-      console.log(data.flightPositions.length);
-      console.log('data: ' + data);
-      for(var i = 0; i < data.flightPositions.length; i++) {
-        var longC = data.flightPositions[i].positions[0].lon;
-        var latC = data.flightPositions[i].positions[0].lat;
-        var callSign = data.flightPositions[i].callsign;
-        var altitude = data.flightPositions[i].positions[0].altitudeFt;
-        var speed = data.flightPositions[i].positions[0].speedMph
-        var popContent = "Call Sign: " + callSign + "<br/>" +"Lon: " + longC + "<br/>" + "Lat: " + latC + "<br/>" + "Altitude: " + altitude + "<br/>" + "Speed: " + speed
+    var url = 'https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/flightsNear/' + coordinates[0] +'/' + coordinates[1] +'/200?appId=' + appID + '&appKey=' + appKey + '&maxFlights=10';
+    console.log(url);
+    $.ajax({
+       url: url,
+       dataType: 'jsonp',
+       method: 'GET',
+       success: function (data) {
+         console.log("IM BACK");
+         console.log(data);
+         drawingPlanesFromAjax(data);
+       }
+     });
+  }
 
-        var x = L.marker([latC, longC], {icon: myIcon})
+  function drawingPlanesFromAjax(data) {
+    console.log("IM IN DRAWING PLANES FROM AJAX");
+    console.log(data.flightPositions.length);
+    console.log('data: ' + data);
+    for(var i = 0; i < data.flightPositions.length; i++) {
+      var longC = data.flightPositions[i].positions[0].lon;
+      var latC = data.flightPositions[i].positions[0].lat;
+      var callSign = data.flightPositions[i].callsign;
+      var altitude = data.flightPositions[i].positions[0].altitudeFt;
+      var speed = data.flightPositions[i].positions[0].speedMph
+      var popContent = "Call Sign: " + callSign + "<br/>" +"Lon: " + longC + "<br/>" + "Lat: " + latC + "<br/>" + "Altitude: " + altitude + "<br/>" + "Speed: " + speed
 
-        x.bindPopup(popContent.toString())
+      var x = L.marker([latC, longC], {icon: myIcon})
 
-        planesLayer.addLayer(x);
-      }
-      mymap.addLayer(planesLayer);
-      // console.log(planesLayer)
-    })
+      x.bindPopup(popContent.toString())
 
-    // var longC = coordinates[1];
-    // var latC = coordinates[0];
-    // var callSign = 'callsign';
-    // var altitude = 'altitudeFt';
-    // var speed = 'speedMph';
-    //
-    // var x = L.marker([latC, longC], {icon: myIcon})
-    //
-    // planesLayer.addLayer(x);
-    // coordinates[1] += 1
-    // coordinates[0] += 1
-    //
-    // mymap.addLayer(planesLayer);
-
+      planesLayer.addLayer(x);
+    }
+    mymap.addLayer(planesLayer);
   }
 
   // CHANGING MAPS
